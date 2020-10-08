@@ -17,8 +17,14 @@ def export(request):
 def simple_upload(request):
     if request.method == 'POST':
         person_resource = PersonResource()
+      #  ouremail = request.POST.getlist("terid")
+       # queryset = Case_Info.objects.filter(email_in=list(map(str, ouremail)))
         dataset = Dataset()
         new_persons = request.FILES['myfile']
+
+
+
+        #validation
 
         imported_data = dataset.load(new_persons.read(), format='xlsx')
         # print(imported_data)
@@ -30,6 +36,7 @@ def simple_upload(request):
                 data[2],
                 data[3]
             )
+
             value.save()
 
             # result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
@@ -39,4 +46,3 @@ def simple_upload(request):
 
     return render(request, 'input.html')
 
-# Create your views here.
